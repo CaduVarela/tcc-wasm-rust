@@ -1,0 +1,4 @@
+target/
+bench/wasm/pkg/
+bench/results/*.json
+node_modules/

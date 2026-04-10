@@ -1,0 +1,11 @@
+[package]
+name = "fibonacci-native"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "fibonacci"
+path = "src/main.rs"
+
+[dependencies]
+fibonacci = { path = "../algorithms/fibonacci" }
