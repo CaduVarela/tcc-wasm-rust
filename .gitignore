@@ -1,5 +1,4 @@
 target/
-bench/wasm/pkg/
-bench/results/*.json
+wasm/pkg/
 node_modules/
 .env
