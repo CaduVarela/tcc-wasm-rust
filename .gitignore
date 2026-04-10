@@ -2,3 +2,4 @@ target/
 wasm/pkg/
 node_modules/
 .env
+results/*.json

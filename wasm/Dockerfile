@@ -1,7 +1,9 @@
 FROM rust:1.77-slim AS wasm-builder
 
-# Install wasm-pack
-RUN curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+# Install curl and wasm-pack
+RUN apt-get update && apt-get install -y curl && \
+    curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -11,7 +13,7 @@ COPY algorithms/fibonacci ./algorithms/fibonacci
 RUN echo '[workspace]\nmembers = ["algorithms/fibonacci"]' > Cargo.toml
 
 WORKDIR /app/algorithms/fibonacci
-RUN wasm-pack build --target web --out-dir /pkg
+RUN /usr/local/cargo/bin/wasm-pack build --target web --out-dir /pkg
 
 # --- Runtime image: Node + Puppeteer + static server ---
 FROM node:20-slim

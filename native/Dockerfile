@@ -12,8 +12,7 @@ COPY native/Cargo.toml ./native/Cargo.toml
 # Create minimal workspace Cargo.toml so cargo can find both crates
 RUN echo '[workspace]\nmembers = ["algorithms/fibonacci", "native"]' > Cargo.toml
 
-WORKDIR /app/native
-RUN cargo build --release
+RUN cargo build --release --package fibonacci-native
 
 # --- Runtime image ---
 FROM debian:bookworm-slim
@@ -25,7 +24,7 @@ RUN apt-get update && apt-get install -y wget && \
     dpkg -i /tmp/hyperfine.deb && \
     rm -rf /var/lib/apt/lists/* /tmp/hyperfine.deb
 
-COPY --from=builder /app/native/target/release/fibonacci /usr/local/bin/fibonacci
+COPY --from=builder /app/target/release/fibonacci /usr/local/bin/fibonacci
 
 COPY native/run.sh /run.sh
 RUN chmod +x /run.sh
