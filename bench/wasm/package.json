@@ -1,0 +1,13 @@
+{
+    "name": "wasm-benchmark",
+    "version": "1.0.0",
+    "description": "Puppeteer runner for WASM fibonacci benchmark",
+    "type": "module",
+    "scripts": {
+        "benchmark": "node benchmark.js"
+    },
+    "dependencies": {
+        "puppeteer-core": "^22.0.0",
+        "serve": "^14.0.0"
+    }
+}
