@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  native:
+    build:
+      context: ..
+      dockerfile: bench/native/Dockerfile
+    volumes:
+      - ./results:/results
+    env_file: .env
+
+  wasm:
+    build:
+      context: ..
+      dockerfile: bench/wasm/Dockerfile
+    volumes:
+      - ./results:/results
+    env_file: .env
+    shm_size: '256mb'
